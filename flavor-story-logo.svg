@@ -1,0 +1,17 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flavorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a18"/>
+      <stop offset="100%" stop-color="#f95c6d"/>
+    </linearGradient>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="120" height="120" rx="28" fill="url(#flavorGradient)"/>
+  <path d="M32 48C36 30 64 26 72 44C78 58 52 61 46 74C42 82 46 92 56 92C66 92 72 86 78 82" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <path d="M50 38L70 34L74 54" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M80 54C84 46 92 40 102 40C110 40 116 48 116 56C116 69 100 78 90 82C84 85 78 85 72 84" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <path d="M22 80C34 76 42 70 52 70C58 70 74 76 82 88" fill="none" stroke="url(#waveGradient)" stroke-width="8" stroke-linecap="round"/>
+</svg>
