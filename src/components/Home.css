@@ -1,0 +1,24 @@
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 24px 0;
+}
+
+.top-rated-btn {
+  background: linear-gradient(135deg, #ff8a65, #ff7043);
+  color: #fff;
+  border: none;
+  border-radius: 32px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(255, 112, 67, 0.24);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.top-rated-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(255, 112, 67, 0.32);
+  filter: brightness(1.05);
+}
