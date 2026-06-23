@@ -3,7 +3,7 @@ import { CDN_URL } from "../utils/constants";
 const Card = (props) => {
   const { resData } = props;
   const { name, cuisines, costForTwo, avgRating, cloudinaryImageId, sla } =
-    resData.card.card.info;
+    resData.info;
     
   return (
     <div className="card">
@@ -17,7 +17,7 @@ const Card = (props) => {
           <span className="card-badge">Bestseller</span>
         </div>
         <div className="card-content">
-          <div key={resData.card.card.info.id}>
+          <div key={resData.info.id}>
             <p className="res-name">{name}</p>
             <p className="res-subtitle">
               {cuisines.join(" • ")} •{" "}

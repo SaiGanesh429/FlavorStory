@@ -108,6 +108,49 @@ body {
   cursor: pointer;
 }
 
+/* auth button variant that aligns with nav items but stands out */
+.auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: none;
+  background: linear-gradient(90deg, #ff7a18 0%, #d6198a 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(214, 25, 138, 0.16);
+  border-radius: 999px;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(214, 25, 138, 0.2);
+}
+
+/* header actions layout: keep nav items together and push cart to the right */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* group the cart and auth controls and align them to the right */
+.header-end {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-pill {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 @media (max-width: 1024px) {
   .search-box {
     flex: 1 1 100%;

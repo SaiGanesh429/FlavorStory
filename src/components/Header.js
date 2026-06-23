@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 
 const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
 
 const Header = () => {
+  const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
   return (
     <div className="header">
       <div className="brand">
@@ -32,8 +34,19 @@ const Header = () => {
         <div className="nav-item">Home</div>
         <div className="nav-item">Contact</div>
         <div className="nav-item">About</div>
-        <div className="nav-item cart-pill">
-          Cart <span className="cart-count">3</span>
+        <div className="header-end">
+          <div className="nav-item cart-pill">
+            Cart <span className="cart-count">3</span>
+          </div>
+          <button
+            className="nav-item auth-btn"
+            onClick={() => {
+              setLogInLogOutBtn((s) => (s === "Login" ? "Logout" : "Login"));
+            }}
+            aria-pressed={logInLogOutBtn === "Logout"}
+          >
+            {logInLogOutBtn}
+          </button>
         </div>
       </div>
     </div>
