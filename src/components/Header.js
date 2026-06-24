@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
+import restaurantList from "../utils/mockData";
 
 const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
 
 const Header = () => {
   const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
+  
   return (
     <div className="header">
       <div className="brand">
@@ -13,7 +15,7 @@ const Header = () => {
           src={flavorStoryImg}
           alt="Flavor Story logo"
           onError={(event) => {
-            event.currentTarget.src =LOGO_URL;
+            event.currentTarget.src = LOGO_URL;
           }}
         />
         <div className="brand-text">
@@ -22,13 +24,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="search-box">
-        <span className="search-icon">🍲</span>
-        <input
-          type="text"
-          placeholder="Search restaurants, cuisines, or dishes"
-        />
-      </div>
+
 
       <div className="header-actions">
         <div className="nav-item">Home</div>

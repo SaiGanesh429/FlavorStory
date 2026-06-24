@@ -7,6 +7,17 @@ import Shimmer from "./Shimmer";
 
 const Home = () => {
   const [restaurantList, setRestaurantList] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
+  const filterRestaurants = (searchText) => {
+    const filteredRestaurants = restaurantList.filter((restaurant) => {
+      const name = restaurant?.info?.name || "";
+      return name.toLowerCase().includes(searchText.toLowerCase());
+    });
+    console.log(filteredRestaurants, "filteredRestaurants");
+    setFilteredRestaurants(filteredRestaurants);
+  };
 
   const handleTopRated = () => {
     const filteredRestaurants = restaurantList.filter((restaurant) => {
@@ -15,11 +26,12 @@ const Home = () => {
       const parsed = parseFloat(rating);
       return !Number.isNaN(parsed) && parsed >= 4;
     });
-    console.log(filteredRestaurants, "filteredRestaurants");
-    setRestaurantList(filteredRestaurants);
+    setFilteredRestaurants(filteredRestaurants);
   };
 
-  const handleReset = () => setRestaurantList(restaurantData);
+  const handleReset = () => {
+    setFilteredRestaurants(restaurantData);
+  };
 
   useEffect(() => {
     fetchRestaurantData();
@@ -27,21 +39,20 @@ const Home = () => {
 
   const fetchRestaurantData = async () => {
     try {
-      const response = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.38430&lng=78.45830&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
-      );
+      const corsProxy = "https://corsproxy.io/?";
+      const SwiggyAPI =
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.38430&lng=78.45830&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+      const response = await fetch(corsProxy + SwiggyAPI);
       const data = await response.json();
-      console.log(
-        data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
-        "external data",
-      );
-      setRestaurantList(
-        data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
-      );
+      const restaurantAPIData =
+        data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
+      setRestaurantList(restaurantAPIData);
+      setFilteredRestaurants(restaurantAPIData);
     } catch (error) {
       console.warn("Error fetching restaurant data (using mock data):", error);
       // fallback to local mock data in dev so UI remains visible
       setRestaurantList(restaurantData);
+      setFilteredRestaurants(restaurantData);
     }
   };
 
@@ -51,15 +62,32 @@ const Home = () => {
   ) : (
     <div>
       <Header />
-      <div className="button-wrapper">
-        <button className="top-rated-btn" onClick={handleTopRated}>
-          Top Rated Restaurants
-        </button>
-        <button className="reset-btn" onClick={handleReset}>
-          Reset
-        </button>
+
+      <div className="home-page-body">
+        <div className="search-actions-row">
+          <div className="search-box">
+            <span className="search-icon">🍲</span>
+            <input
+              type="text"
+              placeholder="Search restaurants, cuisines, or dishes"
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+                filterRestaurants(e.target.value);
+              }}
+            />
+          </div>
+          <div className="button-wrapper">
+            <button className="top-rated-btn" onClick={handleTopRated}>
+              Top Rated
+            </button>
+            <button className="reset-btn" onClick={handleReset}>
+              Reset
+            </button>
+          </div>
+        </div>
+        <CardList restaurants={filteredRestaurants} />
       </div>
-      <CardList restaurants={restaurantList} />
     </div>
   );
 };
