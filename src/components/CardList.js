@@ -1,12 +1,12 @@
 import Card from "./Card";
 
-import restaurantList from "../utils/mockData";
+import defaultRestaurantList from "../utils/mockData";
 
-const CardList = () => {
+const CardList = ({ restaurants = defaultRestaurantList }) => {
   return (
     <div className="card-container">
-      {restaurantList.map((restaurant) => (
-        <Card key={restaurant.card.card.info.id} resData={restaurant} />
+      {restaurants.map((restaurant) => (
+        <Card key={restaurant.info.id} resData={restaurant} />
       ))}
     </div>
   );
