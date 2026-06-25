@@ -10,12 +10,15 @@ const Home = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
+  useEffect(() => {
+    fetchRestaurantData();
+  }, []);
+
   const filterRestaurants = (searchText) => {
     const filteredRestaurants = restaurantList.filter((restaurant) => {
       const name = restaurant?.info?.name || "";
       return name.toLowerCase().includes(searchText.toLowerCase());
     });
-    console.log(filteredRestaurants, "filteredRestaurants");
     setFilteredRestaurants(filteredRestaurants);
   };
 
@@ -32,10 +35,6 @@ const Home = () => {
   const handleReset = () => {
     setFilteredRestaurants(restaurantData);
   };
-
-  useEffect(() => {
-    fetchRestaurantData();
-  }, []);
 
   const fetchRestaurantData = async () => {
     try {
@@ -58,11 +57,10 @@ const Home = () => {
 
   // Conditional Rendering
   return restaurantList.length === 0 ? (
+    // Show shimmer effect while data is loading
     <Shimmer />
   ) : (
     <div>
-      <Header />
-
       <div className="home-page-body">
         <div className="search-actions-row">
           <div className="search-box">

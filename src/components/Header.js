@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import restaurantList from "../utils/mockData";
+import { Link } from "react-router-dom";
 
 const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
 
 const Header = () => {
   const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
-  
+
   return (
     <div className="header">
       <div className="brand">
@@ -24,12 +25,10 @@ const Header = () => {
         </div>
       </div>
 
-
-
       <div className="header-actions">
-        <div className="nav-item">Home</div>
-        <div className="nav-item">Contact</div>
-        <div className="nav-item">About</div>
+        <div className="nav-item">  <Link to="/">Home</Link></div>
+        <div className="nav-item"> <Link to="/contact">Contact</Link></div>
+        <div className="nav-item"> <Link to="/about">About</Link> </div>
         <div className="header-end">
           <div className="nav-item cart-pill">
             Cart <span className="cart-count">3</span>
