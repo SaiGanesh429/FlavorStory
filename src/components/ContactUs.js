@@ -1,10 +1,29 @@
-const   ContactUs = () => {
-  return (
-    <div>
-      <h1>Contact Us</h1>
-      <p>Have questions or feedback? We'd love to hear from you!</p>
-    </div>
-  );
-};
+import {Component} from "react";
+import ContactUsPageContent from "./ContactUsPageContent";
+
+
+class ContactUs extends Component {
+
+  constructor() {
+    console.log("parent Props")
+    super();
+  }
+
+  componentDidMount() {
+    console.log( "Parent component Did mount")
+  }
+
+  
+  render() {
+    console.log("parent Render");
+
+    return (
+      <>
+         < ContactUsPageContent contactUsTitle={"Welcome to first"} />
+      </>
+    )
+
+  }
+}
 
 export default ContactUs;

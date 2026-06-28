@@ -2,7 +2,6 @@ import Header from "./Header";
 import CardList from "./CardList";
 import "./Home.css";
 import { useEffect, useState } from "react";
-import restaurantData from "../utils/mockData";
 import Shimmer from "./Shimmer";
 
 const Home = () => {
@@ -33,7 +32,7 @@ const Home = () => {
   };
 
   const handleReset = () => {
-    setFilteredRestaurants(restaurantData);
+    setFilteredRestaurants(restaurantAPIData);
   };
 
   const fetchRestaurantData = async () => {
@@ -50,8 +49,8 @@ const Home = () => {
     } catch (error) {
       console.warn("Error fetching restaurant data (using mock data):", error);
       // fallback to local mock data in dev so UI remains visible
-      setRestaurantList(restaurantData);
-      setFilteredRestaurants(restaurantData);
+      setRestaurantList(restaurantAPIData);
+      setFilteredRestaurants(restaurantAPIData);
     }
   };
 

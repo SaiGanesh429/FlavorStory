@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
+import "./AboutUs.css";
 
 const AboutUs = () => {
+
+    //below are the state variables created using useState Hook to update the DOM instantly.
+
     const [selectedDish, setSelectedDish] = useState(null);
     const [scrollPosition, setScrollPosition] = useState(0);
 
+    //This useEffect will execute after the component get rendered.
     useEffect(() => {
         const handleScroll = () => setScrollPosition(window.scrollY);
         window.addEventListener("scroll", handleScroll);
