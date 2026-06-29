@@ -13,13 +13,13 @@ class ContactUs extends Component {
     console.log( "Parent component Did mount")
   }
 
-  
+
   render() {
     console.log("parent Render");
 
     return (
       <>
-         < ContactUsPageContent contactUsTitle={"Welcome to first"} />
+         < ContactUsPageContent contactUsTitle={"Contact Us"} />
       </>
     )
 

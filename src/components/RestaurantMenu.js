@@ -1,51 +1,14 @@
 import { useParams } from "react-router-dom";
 import { CDN_URL } from "../utils/constants";
-import restaurantMenuData from "../utils/restaurantMenu.json";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 import "./RestaurantMenu.css";
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-;
+
 
 const RestaurantMenu = () => {
 
-    const [restaurantMenuList, setRestaurantMenuList] = useState(null);
-
-    useEffect(() => {
-        fetchRestaurantData();
-    }, []);
-
-
-    const fetchRestaurantData = async () => {
-        setRestaurantMenuList(restaurantMenuData['data']);
-    }
-
-    //   const fetchRestaurantData = async () => {
-    //     try {
-    //       const corsProxy = "https://corsproxy.io/?";
-    //       const SwiggyAPI =
-    //         "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.3985656&lng=78.3934657&restaurantId=1054154&catalog_qa=undefined&submitAction=ENTER";
-    //       const response = await fetch(corsProxy + SwiggyAPI);
-    //       const data = await response.json();
-    //       console.log(data,"Restaurant Menu Data");
-    //     //   const restaurantAPIData =
-    //     //     data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
-    //     //   setRestaurantList(restaurantAPIData);
-    //     //   setFilteredRestaurants(restaurantAPIData);
-    //     } catch (error) {
-    //     //   console.warn("Error fetching restaurant data (using mock data):", error);
-    //     //   // fallback to local mock data in dev so UI remains visible
-    //     //   setRestaurantList(restaurantAPIData);
-    //     //   setFilteredRestaurants(restaurantAPIData);
-    //     }
-
-
-    //     };
-
-
-
     const { resId } = useParams();
-
-    console.log(resId)
+    const restaurantMenuList = useRestaurantMenu();
 
     if (!restaurantMenuList) {
         return <div className="restaurant-menu-container">Restaurant not found</div>;
@@ -53,8 +16,6 @@ const RestaurantMenu = () => {
 
     if (restaurantMenuList === null) return <Shimmer />;
 
-    console.log("Restaurant Menu List:", restaurantMenuList);
-    
     const {
         name,
         cloudinaryImageId,
@@ -67,13 +28,10 @@ const RestaurantMenu = () => {
         aggregatedDiscountInfo
     } = restaurantMenuList?.cards[2]?.card?.card?.info;
 
-
-
     const itemCards = restaurantMenuList?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card.itemCards;
 
     return (
         <div className="restaurant-menu-container">
-            {/* Restaurant Header */}
             <div className="restaurant-header">
                 <img
                     src={CDN_URL + cloudinaryImageId}

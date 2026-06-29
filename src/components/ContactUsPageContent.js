@@ -5,7 +5,6 @@ class ContactUsPageContent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            count: 0,
             contactUsContent: "Have questions or feedback? We'd love to hear from you!!",
             avatarURL: "",
             name: "",
@@ -26,17 +25,11 @@ class ContactUsPageContent extends React.Component {
     render() {
         return (
             <div>
-                <h1>{this.props.contactUsTitle} - Contact Us -Count = {this.state.count}</h1>
+                <h1>{this.props.contactUsTitle}</h1>
                 <p>{this.state.contactUsContent}</p>
-                <button onClick={() => {
-                    this.setState({
-                        count: this.state.count + 1
-                    });
-                }}>Count</button>
                 <div>
-                    <div>{this.state.name}</div>
-                    <div>{this.state.avatarURL && <img className="avatar_image"  src={this.state.avatarURL} alt={this.state.name} />}</div>
-                    <div>{this.state.bio}</div>
+                    <div>{this.state.avatarURL && <img className="avatar_image" src={this.state.avatarURL} alt={this.state.name} />}</div>
+                    <div>{this.state.name}</div> -- <span>{this.state.bio}</span>
                 </div>
             </div>
 
