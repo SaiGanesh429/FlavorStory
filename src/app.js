@@ -1,12 +1,18 @@
+import { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import "./App.css";
-import AboutUs from "./components/AboutUs";
-import ContactUs from "./components/ContactUs";
 import ErrorPage from "./components/ErrorPage";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import RestaurantMenu from "./components/RestaurantMenu";
+import Shimmer from "./components/Shimmer";
+
+//Lazy  Loading
+const GroceryStore = lazy(() => import("./components/GroceryStore"));
+const ContactUs = lazy(() => import("./components/ContactUs"));
+const AboutUs = lazy(() => import("./components/AboutUs"));
+const ErrorPage = lazy(() => import("./components/ErrorPage"));
 
 const AppLayout = () => {
   return (
@@ -16,6 +22,8 @@ const AppLayout = () => {
     </div>
   );
 };
+
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -29,12 +37,17 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <AboutUs />,
+        element: <Suspense fallback={<Shimmer></Shimmer>}><AboutUs /></Suspense>,
         errorElement: <ErrorPage />,
       },
       {
         path: "/contact",
-        element: <ContactUs />,
+        element: <Suspense fallback={<Shimmer></Shimmer>}><ContactUs /></Suspense>,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/grocery",
+        element: <Suspense fallback={<Shimmer></Shimmer>}><GroceryStore /></Suspense>,
         errorElement: <ErrorPage />,
       },
       {

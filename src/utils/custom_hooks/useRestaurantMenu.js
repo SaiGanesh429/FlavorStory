@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import restaurantMenuData from "./restaurantMenu.json";
+import restaurantMenuData from "../restaurantMenu.json";
 const useRestaurantMenu = () => {
 
     const [restaurantMenuList, setRestaurantMenuList] = useState(null);
@@ -9,14 +9,11 @@ const useRestaurantMenu = () => {
         fetchRestaurantData();
     }, []);
 
-
     const fetchRestaurantData = async () => {
         setRestaurantMenuList(restaurantMenuData['data']);
     }
 
-
     return restaurantMenuList;
 }
-
 
 export default useRestaurantMenu;

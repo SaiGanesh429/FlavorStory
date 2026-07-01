@@ -13,7 +13,6 @@ class ContactUs extends Component {
     console.log( "Parent component Did mount")
   }
 
-
   render() {
     console.log("parent Render");
 
@@ -22,7 +21,7 @@ class ContactUs extends Component {
          < ContactUsPageContent contactUsTitle={"Contact Us"} />
       </>
     )
-
+    
   }
 }
 

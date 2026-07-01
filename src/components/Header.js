@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { LOGO_URL } from "../utils/constants";
-import restaurantList from "../utils/mockData";
 import { Link } from "react-router-dom";
+import { LOGO_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/custom_hooks/useOnlineStatus";
 
-const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
 
 const Header = () => {
   const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
+  const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
+  const getOnlineStatus = useOnlineStatus();
 
   return (
     <div className="header">
@@ -20,7 +21,7 @@ const Header = () => {
           }}
         />
         <div className="brand-text">
-          <h1>Flavor Story</h1>
+          <h1>Flavor Story <span>{getOnlineStatus ? "🟢" : "🔴"}</span></h1>
           <p>Fresh eats and local favorites delivered fast.</p>
         </div>
       </div>
@@ -29,6 +30,7 @@ const Header = () => {
         <div className="nav-item">  <Link to="/">Home</Link></div>
         <div className="nav-item"> <Link to="/contact">Contact</Link></div>
         <div className="nav-item"> <Link to="/about">About</Link> </div>
+        <div className="nav-item"> <Link to="/grocery">Grocery</Link> </div>
         <div className="header-end">
           <div className="nav-item cart-pill">
             Cart <span className="cart-count">3</span>

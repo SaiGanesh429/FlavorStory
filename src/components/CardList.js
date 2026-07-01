@@ -1,7 +1,6 @@
-import Card from "./Card";
-
-import defaultRestaurantList from "../utils/mockData";
 import { Link } from "react-router-dom";
+import defaultRestaurantList from "../utils/mockData";
+import Card from "./Card";
 
 const CardList = ({ restaurants = defaultRestaurantList }) => {
   return (

@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";     
 import { CDN_URL } from "../utils/constants";
-import useRestaurantMenu from "../utils/useRestaurantMenu";
+import useRestaurantMenu from "../utils/custom_hooks/useRestaurantMenu";
 import "./RestaurantMenu.css";
 import Shimmer from "./Shimmer";
 

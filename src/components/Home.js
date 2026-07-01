@@ -1,7 +1,7 @@
-import Header from "./Header";
+import { useEffect, useState } from "react";
+import useOnlineStatus from "../utils/custom_hooks/useOnlineStatus";
 import CardList from "./CardList";
 import "./Home.css";
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 
 const Home = () => {
@@ -32,7 +32,7 @@ const Home = () => {
   };
 
   const handleReset = () => {
-    setFilteredRestaurants(restaurantAPIData);
+    setFilteredRestaurants(restaurantList);
   };
 
   const fetchRestaurantData = async () => {
@@ -54,39 +54,43 @@ const Home = () => {
     }
   };
 
-  // Conditional Rendering
-  return restaurantList.length === 0 ? (
-    // Show shimmer effect while data is loading
-    <Shimmer />
-  ) : (
-    <div>
-      <div className="home-page-body">
-        <div className="search-actions-row">
-          <div className="search-box">
-            <span className="search-icon">🍲</span>
-            <input
-              type="text"
-              placeholder="Search restaurants, cuisines, or dishes"
-              value={searchText}
-              onChange={(e) => {
-                setSearchText(e.target.value);
-                filterRestaurants(e.target.value);
-              }}
-            />
+  const getOnlineStatus = useOnlineStatus();
+
+if(!getOnlineStatus) return <h1>Looks like  you are offLine... You do have an active internet connection </h1>
+
+    // Conditional Rendering
+    return restaurantList.length === 0 ? (
+      // Show shimmer effect while data is loading
+      <Shimmer />
+    ) : (
+      <div>
+        <div className="home-page-body">
+          <div className="search-actions-row">
+            <div className="search-box">
+              <span className="search-icon">🍲</span>
+              <input
+                type="text"
+                placeholder="Search restaurants, cuisines, or dishes"
+                value={searchText}
+                onChange={(e) => {
+                  setSearchText(e.target.value);
+                  filterRestaurants(e.target.value);
+                }}
+              />
+            </div>
+            <div className="button-wrapper">
+              <button className="top-rated-btn" onClick={handleTopRated}>
+                Top Rated
+              </button>
+              <button className="reset-btn" onClick={handleReset}>
+                Reset
+              </button>
+            </div>
           </div>
-          <div className="button-wrapper">
-            <button className="top-rated-btn" onClick={handleTopRated}>
-              Top Rated
-            </button>
-            <button className="reset-btn" onClick={handleReset}>
-              Reset
-            </button>
-          </div>
+          <CardList restaurants={filteredRestaurants} />
         </div>
-        <CardList restaurants={filteredRestaurants} />
       </div>
-    </div>
-  );
+    );
 };
 
 export default Home;

@@ -8,6 +8,7 @@ class ContactUsPageContent extends React.Component {
             contactUsContent: "Have questions or feedback? We'd love to hear from you!!",
             avatarURL: "",
             name: "",
+            bio: "",
             location: ""
         }
     }
@@ -32,7 +33,6 @@ class ContactUsPageContent extends React.Component {
                     <div>{this.state.name}</div> -- <span>{this.state.bio}</span>
                 </div>
             </div>
-
         )
     }
 }
