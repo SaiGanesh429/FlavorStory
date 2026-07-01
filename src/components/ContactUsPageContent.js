@@ -26,10 +26,10 @@ class ContactUsPageContent extends React.Component {
     render() {
         return (
             <div>
-                <h1>{this.props.contactUsTitle}</h1>
+                <h1 className ="w-70 bg-green-600">{this.props.contactUsTitle}</h1>
                 <p>{this.state.contactUsContent}</p>
                 <div>
-                    <div>{this.state.avatarURL && <img className="avatar_image" src={this.state.avatarURL} alt={this.state.name} />}</div>
+                    <div>{this.state.avatarURL && <img className="w-30 h-30 rounded-full" src={this.state.avatarURL} alt={this.state.name} />}</div>
                     <div>{this.state.name}</div> -- <span>{this.state.bio}</span>
                 </div>
             </div>

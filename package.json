@@ -9,12 +9,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
     "parcel": "^2.16.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.18.0"
   },
-   "@parcel/resolver-default": {
+  "@parcel/resolver-default": {
     "packageExports": true
+  },
+  "devDependencies": {
+    "postcss": "^8.5.16",
+    "tailwindcss": "^4.3.2"
   }
 }
