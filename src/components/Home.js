@@ -1,8 +1,7 @@
-import Header from "./Header";
+import { useEffect, useState } from "react";
+import useOnlineStatus from "../utils/custom_hooks/useOnlineStatus";
 import CardList from "./CardList";
 import "./Home.css";
-import { useEffect, useState } from "react";
-import restaurantData from "../utils/mockData";
 import Shimmer from "./Shimmer";
 
 const Home = () => {
@@ -10,12 +9,15 @@ const Home = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
+  useEffect(() => {
+    fetchRestaurantData();
+  }, []);
+
   const filterRestaurants = (searchText) => {
     const filteredRestaurants = restaurantList.filter((restaurant) => {
       const name = restaurant?.info?.name || "";
       return name.toLowerCase().includes(searchText.toLowerCase());
     });
-    console.log(filteredRestaurants, "filteredRestaurants");
     setFilteredRestaurants(filteredRestaurants);
   };
 
@@ -30,12 +32,8 @@ const Home = () => {
   };
 
   const handleReset = () => {
-    setFilteredRestaurants(restaurantData);
+    setFilteredRestaurants(restaurantList);
   };
-
-  useEffect(() => {
-    fetchRestaurantData();
-  }, []);
 
   const fetchRestaurantData = async () => {
     try {
@@ -51,45 +49,48 @@ const Home = () => {
     } catch (error) {
       console.warn("Error fetching restaurant data (using mock data):", error);
       // fallback to local mock data in dev so UI remains visible
-      setRestaurantList(restaurantData);
-      setFilteredRestaurants(restaurantData);
+      setRestaurantList(restaurantAPIData);
+      setFilteredRestaurants(restaurantAPIData);
     }
   };
 
-  // Conditional Rendering
-  return restaurantList.length === 0 ? (
-    <Shimmer />
-  ) : (
-    <div>
-      <Header />
+  const getOnlineStatus = useOnlineStatus();
 
-      <div className="home-page-body">
-        <div className="search-actions-row">
-          <div className="search-box">
-            <span className="search-icon">🍲</span>
-            <input
-              type="text"
-              placeholder="Search restaurants, cuisines, or dishes"
-              value={searchText}
-              onChange={(e) => {
-                setSearchText(e.target.value);
-                filterRestaurants(e.target.value);
-              }}
-            />
+if(!getOnlineStatus) return <h1>Looks like  you are offLine... You do have an active internet connection </h1>
+
+    // Conditional Rendering
+    return restaurantList.length === 0 ? (
+      // Show shimmer effect while data is loading
+      <Shimmer />
+    ) : (
+      <div>
+        <div className="home-page-body">
+          <div className="search-actions-row">
+            <div className="search-box">
+              <span className="search-icon">🍲</span>
+              <input
+                type="text"
+                placeholder="Search restaurants, cuisines, or dishes"
+                value={searchText}
+                onChange={(e) => {
+                  setSearchText(e.target.value);
+                  filterRestaurants(e.target.value);
+                }}
+              />
+            </div>
+            <div className="button-wrapper">
+              <button className="top-rated-btn" onClick={handleTopRated}>
+                Top Rated
+              </button>
+              <button className="reset-btn" onClick={handleReset}>
+                Reset
+              </button>
+            </div>
           </div>
-          <div className="button-wrapper">
-            <button className="top-rated-btn" onClick={handleTopRated}>
-              Top Rated
-            </button>
-            <button className="reset-btn" onClick={handleReset}>
-              Reset
-            </button>
-          </div>
+          <CardList restaurants={filteredRestaurants} />
         </div>
-        <CardList restaurants={filteredRestaurants} />
       </div>
-    </div>
-  );
+    );
 };
 
 export default Home;
