@@ -1,9 +1,15 @@
 import { CDN_URL } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
   const { resData } = props;
-  const { name, cuisines, costForTwo, avgRating, cloudinaryImageId, sla } =
-    resData.card.card.info;
+  const navigate = useNavigate();
+  const { name, cuisines, costForTwo, avgRating, cloudinaryImageId, sla, id } =
+    resData.info;
+    
+  // const handleCardClick = () => {
+  //   navigate(`/restaurant/${id}`);
+  // };
     
   return (
     <div className="card">
@@ -17,7 +23,7 @@ const Card = (props) => {
           <span className="card-badge">Bestseller</span>
         </div>
         <div className="card-content">
-          <div key={resData.card.card.info.id}>
+          <div key={resData.info.id}>
             <p className="res-name">{name}</p>
             <p className="res-subtitle">
               {cuisines.join(" • ")} •{" "}

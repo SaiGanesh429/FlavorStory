@@ -1,8 +1,14 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/custom_hooks/useOnlineStatus";
 
-const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
 
 const Header = () => {
+  const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
+  const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
+  const getOnlineStatus = useOnlineStatus();
+
   return (
     <div className="header">
       <div className="brand">
@@ -11,29 +17,33 @@ const Header = () => {
           src={flavorStoryImg}
           alt="Flavor Story logo"
           onError={(event) => {
-            event.currentTarget.src =LOGO_URL;
+            event.currentTarget.src = LOGO_URL;
           }}
         />
         <div className="brand-text">
-          <h1>Flavor Story</h1>
+          <h1>Flavor Story <span>{getOnlineStatus ? "🟢" : "🔴"}</span></h1>
           <p>Fresh eats and local favorites delivered fast.</p>
         </div>
       </div>
 
-      <div className="search-box">
-        <span className="search-icon">🍲</span>
-        <input
-          type="text"
-          placeholder="Search restaurants, cuisines, or dishes"
-        />
-      </div>
-
       <div className="header-actions">
-        <div className="nav-item">Home</div>
-        <div className="nav-item">Contact</div>
-        <div className="nav-item">About</div>
-        <div className="nav-item cart-pill">
-          Cart <span className="cart-count">3</span>
+        <div className="nav-item">  <Link to="/">Home</Link></div>
+        <div className="nav-item"> <Link to="/contact">Contact</Link></div>
+        <div className="nav-item"> <Link to="/about">About</Link> </div>
+        <div className="nav-item"> <Link to="/grocery">Grocery</Link> </div>
+        <div className="header-end">
+          <div className="nav-item cart-pill">
+            Cart <span className="cart-count">3</span>
+          </div>
+          <button
+            className="nav-item auth-btn"
+            onClick={() => {
+              setLogInLogOutBtn((s) => (s === "Login" ? "Logout" : "Login"));
+            }}
+            aria-pressed={logInLogOutBtn === "Logout"}
+          >
+            {logInLogOutBtn}
+          </button>
         </div>
       </div>
     </div>

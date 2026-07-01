@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
+import defaultRestaurantList from "../utils/mockData";
 import Card from "./Card";
 
-import restaurantList from "../utils/mockData";
-
-const CardList = () => {
+const CardList = ({ restaurants = defaultRestaurantList }) => {
   return (
     <div className="card-container">
-      {restaurantList.map((restaurant) => (
-        <Card key={restaurant.card.card.info.id} resData={restaurant} />
+      {restaurants.map((restaurant) => (
+        <Link key={restaurant.info.id} to={`/restaurant/${restaurant.info.id}`}>
+          <Card resData={restaurant} />
+        </Link>
       ))}
     </div>
   );
