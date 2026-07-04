@@ -39,11 +39,12 @@ const Home = () => {
     try {
       const corsProxy = "https://corsproxy.io/?";
       const SwiggyAPI =
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.38430&lng=78.45830&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.3985656&lng=78.3934657&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null";
       const response = await fetch(corsProxy + SwiggyAPI);
       const data = await response.json();
-      const restaurantAPIData =
-        data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
+      const [firstItem, secondItem, thirdItem, ...restaurantAPIData] =
+        data.data.cards;
+        console.log(restaurantAPIData, "API data");
       setRestaurantList(restaurantAPIData);
       setFilteredRestaurants(restaurantAPIData);
     } catch (error) {
@@ -87,7 +88,7 @@ if(!getOnlineStatus) return <h1>Looks like  you are offLine... You do have an ac
               </button>
             </div>
           </div>
-          <CardList restaurants={filteredRestaurants} />
+          <CardList restaurants={restaurantList} />
         </div>
       </div>
     );
