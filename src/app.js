@@ -6,6 +6,7 @@ import ErrorPage from "./components/ErrorPage";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import RestaurantMenu from "./components/RestaurantMenu";
+import RestaurantMenuList from "./components/RestaurantMenuList";
 import Shimmer from "./components/Shimmer";
 
 //Lazy  Loading
@@ -13,6 +14,7 @@ const GroceryStore = lazy(() => import("./components/GroceryStore"));
 const ContactUs = lazy(() => import("./components/ContactUs"));
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const ErrorPage = lazy(() => import("./components/ErrorPage"));
+const RestaurantMenuList = lazy(() => import("./components/RestaurantMenuList"));
 
 const AppLayout = () => {
   return (
@@ -52,7 +54,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/restaurant/:resId",
-        element: <RestaurantMenu />,
+        element:<Suspense fallback={<Shimmer></Shimmer>}><RestaurantMenuList /></Suspense>,
         errorElement: <ErrorPage />,
       },
       {

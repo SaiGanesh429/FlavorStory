@@ -5,12 +5,12 @@ const Card = (props) => {
   const { resData } = props;
   const navigate = useNavigate();
   const { name, cuisines, costForTwo, avgRating, cloudinaryImageId, sla, id } =
-    resData.info;
-    
+    resData.card.card.info;
+
   // const handleCardClick = () => {
   //   navigate(`/restaurant/${id}`);
   // };
-    
+
   return (
     <div className="card">
       <div>
@@ -20,10 +20,9 @@ const Card = (props) => {
             src={CDN_URL + cloudinaryImageId}
             alt="Card Image"
           />
-          <span className="card-badge">Bestseller</span>
         </div>
         <div className="card-content">
-          <div key={resData.info.id}>
+          <div key={resData.card.card.info.id}>
             <p className="res-name">{name}</p>
             <p className="res-subtitle">
               {cuisines.join(" • ")} •{" "}
@@ -41,6 +40,22 @@ const Card = (props) => {
       </div>
     </div>
   );
+};
+
+// Adding Higher order components for Promoted restaurants
+export const withPromotedLabel = (CardComponent) => {
+  return (props) => {
+    const { resData } = props;
+    if (resData.card.card.info.promoted) {
+      return (
+        <div className="promoted-card">
+          <label className="bg-black absolute text-white m-2 p-2 rounded-lg z-9">Promoted</label>
+          <CardComponent {...props} />
+        </div>
+      );
+    }
+    return <CardComponent {...props} />;
+  };
 };
 
 export default Card;
