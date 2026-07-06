@@ -1,5 +1,8 @@
-import {Component} from "react";
+import { Component } from "react";
 import ContactUsPageContent from "./ContactUsPageContent";
+// import DefaultContexts from "../utils/custom_contexts/default_contexts";
+
+
 
 
 class ContactUs extends Component {
@@ -10,7 +13,7 @@ class ContactUs extends Component {
   }
 
   componentDidMount() {
-    console.log( "Parent component Did mount")
+    console.log("Parent component Did mount")
   }
 
   render() {
@@ -18,10 +21,17 @@ class ContactUs extends Component {
 
     return (
       <>
-         < ContactUsPageContent contactUsTitle={"Contact Us"} />
+        {/* <DefaultContexts.Consumer>
+          {(data) => (
+            <div className="context-info">
+              <p>Logged in user: {data?.loggedInUser || "Guest"}</p>
+            </div>
+          )}
+        </DefaultContexts.Consumer> */}
+
+        <ContactUsPageContent contactUsTitle={"Contact Us"} />
       </>
-    )
-    
+    );
   }
 }
 
