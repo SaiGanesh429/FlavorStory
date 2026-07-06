@@ -1,1 +1,0 @@
-https://www.swiggy.com/city/hyderabad/homely-kukatpally-circle-no-24-manikonda-rest80482
