@@ -2,11 +2,8 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import "./App.css";
-import ErrorPage from "./components/ErrorPage";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import RestaurantMenu from "./components/RestaurantMenu";
-import RestaurantMenuList from "./components/RestaurantMenuList";
 import Shimmer from "./components/Shimmer";
 import DefaultContexts from "./utils/custom_contexts/default_contexts";
 
