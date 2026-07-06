@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/custom_hooks/useOnlineStatus";
+import DefaultContexts from "../utils/custom_contexts/default_contexts";
 
 
+
+//This useEffect will execute after the component get rendered.
 const Header = () => {
+  const { loggedInUser, setUserName, handleUserNameChange } = useContext(DefaultContexts);
   const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
   const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
   const getOnlineStatus = useOnlineStatus();
@@ -31,6 +35,9 @@ const Header = () => {
         <div className="nav-item"> <Link to="/contact">Contact</Link></div>
         <div className="nav-item"> <Link to="/about">About</Link> </div>
         <div className="nav-item"> <Link to="/grocery">Grocery</Link> </div>
+        <div className="nav-item"> {loggedInUser} </div>
+        <div className="nav-item"> <label> Set User Name: <input type="text" placeholder="Enter your name"
+          value={loggedInUser} onChange={(e) => setUserName(e.target.value)} /> </label> </div>
         <div className="header-end">
           <div className="nav-item cart-pill">
             Cart <span className="cart-count">3</span>

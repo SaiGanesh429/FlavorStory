@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./AboutUs.css";
+import DefaultContexts from "../utils/custom_contexts/default_contexts";
 
 const AboutUs = () => {
 
@@ -7,6 +8,7 @@ const AboutUs = () => {
 
     const [selectedDish, setSelectedDish] = useState(null);
     const [scrollPosition, setScrollPosition] = useState(0);
+    const {loggedInUser} = useContext(DefaultContexts);
 
     //This useEffect will execute after the component get rendered.
     useEffect(() => {
