@@ -1,8 +1,16 @@
 import { CDN_URL } from "../utils/constants";
 import "./RestaurantMenu.css";
 import Shimmer from "./Shimmer";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../utils/react-state-management/cartSlice";
 
 const RestaurantMenu = ({ menuItems }) => {
+    const dispatchFn = useDispatch();
+
+    const handleAddToCart = (item) => {
+        dispatchFn(addItemToCart(item));
+    };
+
     if (menuItems === null) return <Shimmer />;
 
     const safeMenuItems = Array.isArray(menuItems) ? menuItems : [];
@@ -38,7 +46,9 @@ const RestaurantMenu = ({ menuItems }) => {
                                                 <span className="menu-item-price">₹{price}</span>
                                                 <span className="menu-item-subtle">Chef’s special</span>
                                             </div>
-                                            <button className="add-to-cart-btn">Add</button>
+                                            <button className="add-to-cart-btn" onClick={() => handleAddToCart(info)}>
+                                                Add
+                                            </button>
                                         </div>
                                     </div>
 

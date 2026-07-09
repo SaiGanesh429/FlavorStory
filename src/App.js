@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Shimmer from "./components/Shimmer";
 import DefaultContexts from "./utils/custom_contexts/default_contexts";
+import { Provider } from "react-redux";
+import appStore from "./utils/react-state-management/appStore";
 
 //Lazy  Loading
 const GroceryStore = lazy(() => import("./components/GroceryStore"));
@@ -32,12 +34,14 @@ const AppLayout = () => {
   }
   return (
     <div className="app">
+      <Provider store={appStore}>
       <DefaultContexts.Provider value={{ theme: "light", loggedInUser: userName, setUserName, handleUserNameChange }}>
         <Header />
         <DefaultContexts.Provider value={{ theme: "light", loggedInUser: "Default" }}>
           <Outlet />
         </DefaultContexts.Provider>
       </DefaultContexts.Provider>
+      </Provider>
     </div>
   );
 };
