@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/custom_hooks/useOnlineStatus";
 import DefaultContexts from "../utils/custom_contexts/default_contexts";
-
+import { useSelector } from "react-redux";
 
 
 //This useEffect will execute after the component get rendered.
 const Header = () => {
+
+  const cartItem = useSelector((store) => store.cart.items);
+  
   const { loggedInUser, setUserName, handleUserNameChange } = useContext(DefaultContexts);
   const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
   const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
@@ -40,7 +43,7 @@ const Header = () => {
           value={loggedInUser} onChange={(e) => setUserName(e.target.value)} /> </label> </div>
         <div className="header-end">
           <div className="nav-item cart-pill">
-            Cart <span className="cart-count">3</span>
+            Cart <span className="cart-count">{cartItem.length}</span>
           </div>
           <button
             className="nav-item auth-btn"
