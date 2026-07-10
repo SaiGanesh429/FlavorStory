@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
 
   const cartItem = useSelector((store) => store.cart.items);
-  
+
   const { loggedInUser, setUserName, handleUserNameChange } = useContext(DefaultContexts);
   const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
   const flavorStoryImg = new URL("../assets/flavorStory.jpeg", import.meta.url);
@@ -43,7 +43,8 @@ const Header = () => {
           value={loggedInUser} onChange={(e) => setUserName(e.target.value)} /> </label> </div>
         <div className="header-end">
           <div className="nav-item cart-pill">
-            Cart <span className="cart-count">{cartItem.length}</span>
+            <Link to="/cart">Cart</Link>
+            <span className="cart-count">{cartItem.length}</span>
           </div>
           <button
             className="nav-item auth-btn"

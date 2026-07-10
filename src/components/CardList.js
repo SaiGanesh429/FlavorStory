@@ -1,23 +1,19 @@
-import { Link } from "react-router-dom";
-import defaultRestaurantList from "../utils/mockData";
 import Card, { withPromotedLabel } from "./Card";
 
 const PromotedRestaurantCard = withPromotedLabel(Card);
 
-
-const CardList = ({ restaurants  }) => {
+const CardList = ({ restaurants }) => {
   return (
     <div className="card-container">
-      {restaurants.map((restaurant) => (
-        <Link key={restaurant.card.card.info.id} to={`/restaurant/${restaurant.card.card.info.id}`}>
-          {restaurant.card.card.info.promoted ? (
-            <PromotedRestaurantCard resData={restaurant} />
-          ) : (
-            <Card resData={restaurant} />
-          )
-          }
-        </Link>
-      ))}
+      {restaurants.map((restaurant) => {
+        const info = restaurant?.card?.card?.info;
+        if (!info) return null;
+
+        const cardKey = info.id;
+        const CardComponent = info.promoted ? PromotedRestaurantCard : Card;
+
+        return <CardComponent key={cardKey} resData={restaurant} />;
+      })}
     </div>
   );
 };
