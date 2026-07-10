@@ -2,12 +2,16 @@ import { CDN_URL } from "../utils/constants";
 import "./RestaurantMenu.css";
 import Shimmer from "./Shimmer";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../utils/react-state-management/cartSlice";
+import { addItemToCart } from "../utils/react-state-management/cartSlice.js";
+import { useParams } from "react-router-dom";
 
 const RestaurantMenu = ({ menuItems }) => {
+    const params = useParams();
+    console.log("qq", params, params == {})
     const dispatchFn = useDispatch();
 
     const handleAddToCart = (item) => {
+
         dispatchFn(addItemToCart(item));
     };
 
@@ -24,8 +28,8 @@ const RestaurantMenu = ({ menuItems }) => {
             <div className="menu-section">
                 <div className="menu-grid">
                     {safeMenuItems.map((item) => {
-                        const info = item?.card?.info || {};
-                        const seed = info.id || info.name || Math.random().toString(36).slice(2, 8);
+                        const info = item?.card?.info || item || {};
+                        const seed = info.id || info.name || item.name || Math.random().toString(36).slice(2, 8);
                         const imageUrl = info.imageId
                             ? CDN_URL + info.imageId
                             : `https://picsum.photos/seed/${encodeURIComponent(seed)}/600/400`;
@@ -46,9 +50,11 @@ const RestaurantMenu = ({ menuItems }) => {
                                                 <span className="menu-item-price">₹{price}</span>
                                                 <span className="menu-item-subtle">Chef’s special</span>
                                             </div>
-                                            <button className="add-to-cart-btn" onClick={() => handleAddToCart(info)}>
-                                                Add
-                                            </button>
+                                            {params?.resId  && (
+                                                <button className="add-to-cart-btn" onClick={() => handleAddToCart(info)}>
+                                                    Add
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
 

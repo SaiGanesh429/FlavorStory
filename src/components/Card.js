@@ -7,12 +7,12 @@ const Card = (props) => {
   const { name, cuisines, costForTwo, avgRating, cloudinaryImageId, sla, id } =
     resData.card.card.info;
 
-  // const handleCardClick = () => {
-  //   navigate(`/restaurant/${id}`);
-  // };
+  const handleCardClick = () => {
+    navigate(`/restaurant/${id}`);
+  };
 
   return (
-    <div className="card">
+    <div className="card" onClick={handleCardClick} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && handleCardClick()}>
       <div>
         <div className="card-image-wrap">
           <img

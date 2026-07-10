@@ -15,6 +15,7 @@ const ContactUs = lazy(() => import("./components/ContactUs"));
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const ErrorPage = lazy(() => import("./components/ErrorPage"));
 const RestaurantMenuList = lazy(() => import("./components/RestaurantMenuList"));
+const Cart = lazy(() => import("./components/Cart"));
 
 
 
@@ -76,6 +77,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <Suspense fallback={<Shimmer></Shimmer>}><RestaurantMenuList /></Suspense>,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path : "/cart",
+        element : <Suspense fallback={<Shimmer></Shimmer>}><Cart /></Suspense>,
         errorElement: <ErrorPage />,
       },
       {
