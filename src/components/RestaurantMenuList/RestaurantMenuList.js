@@ -1,8 +1,8 @@
 import { useState } from "react";
-import useRestaurantMenu from "../utils/custom_hooks/useRestaurantMenu";
+import useRestaurantMenu from "../../utils/custom_hooks/useRestaurantMenu";
 import RestaurantMenu from "./RestaurantMenu";
-import Shimmer from "./Shimmer";
 import "./RestaurantMenu.css";
+import Shimmer from "../Shared/Shimmer/Shimmer";
 
 const RestaurantMenuList = () => {
     const restaurantMenuList = useRestaurantMenu();
