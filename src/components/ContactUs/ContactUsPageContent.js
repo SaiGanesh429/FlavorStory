@@ -13,14 +13,33 @@ class ContactUsPageContent extends React.Component {
         }
     }
 
-    async componentDidMount() {
-        const data = await fetch("https://api.github.com/users/SaiGanesh429");
-        const userData = await data.json();
-        this.setState({
-            avatarURL: userData.avatar_url,
-            name: userData.name,
-            bio: userData.bio
-        });
+    componentDidMount() {
+        if (typeof window === "undefined") return;
+        if (process.env.NODE_ENV === "test") {
+            this.setState({
+                avatarURL: "https://avatars.githubusercontent.com/u/109084168?v=4",
+                name: "Sai Ganesh",
+                bio: "Developer"
+            });
+            return;
+        }
+
+        fetch("https://api.github.com/users/SaiGanesh429")
+            .then((response) => response.json())
+            .then((userData) => {
+                this.setState({
+                    avatarURL: userData.avatar_url,
+                    name: userData.name,
+                    bio: userData.bio
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    avatarURL: "",
+                    name: "",
+                    bio: ""
+                });
+            });
     }
 
     render() {
