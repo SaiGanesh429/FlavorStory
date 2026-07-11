@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import RestaurantMenu from "./RestaurantMenu";
-import { clearCart } from "../utils/react-state-management/cartSlice.js";
+import { clearCart } from "../../utils/react-state-management/cartSlice.js";
+import RestaurantMenu from "../RestaurantMenuList/RestaurantMenu.js";
 
 const Cart = () => {
     // Get the dispatch function from Redux

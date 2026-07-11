@@ -1,4 +1,4 @@
-import { CDN_URL } from "../utils/constants";
+import { CDN_URL } from "../../../utils/constants";
 import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
