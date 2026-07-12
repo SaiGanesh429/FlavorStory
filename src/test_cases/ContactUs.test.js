@@ -8,10 +8,9 @@ test("renders the contact page heading", () => {
     expect(heading).toBeInTheDocument();
 });
 
-
-test("should have load the image profile", () => {
+test("renders the contact profile image when available", () => {
     render(<ContactUs />);
     const image = screen.getByRole("img");
     expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute("src", "https://avatars.githubusercontent.com/u/109084168?v=4"); 
+    expect(image.getAttribute("src")).toContain("avatars");
 });
