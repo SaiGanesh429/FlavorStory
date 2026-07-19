@@ -1,5 +1,6 @@
 import { Component } from "react";
 import ContactUsPageContent from "./ContactUsPageContent";
+import "./ContactUs.css";
 // import DefaultContexts from "../utils/custom_contexts/default_contexts";
 
 

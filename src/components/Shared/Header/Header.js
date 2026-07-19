@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { LOGO_URL } from "../../../utils/constants";
 import useOnlineStatus from "../../../utils/custom_hooks/useOnlineStatus";
@@ -13,7 +13,7 @@ const Header = () => {
 
   const { loggedInUser, setUserName, handleUserNameChange } = useContext(DefaultContexts);
   const [logInLogOutBtn, setLogInLogOutBtn] = useState("Login");
-  const flavorStoryImg = new URL("../../../assets/flavorStory.jpeg", import.meta.url);
+  const flavorStoryImg = "../../../assets/flavorStory.jpeg";
   const getOnlineStatus = useOnlineStatus();
 
   return (
