@@ -2,20 +2,21 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import Shimmer from "./components/Shimmer";
+import Home from "./components/Home/Home";
+import Header from "./components/Shared/Header/Header";
 import DefaultContexts from "./utils/custom_contexts/default_contexts";
 import { Provider } from "react-redux";
 import appStore from "./utils/react-state-management/appStore";
+import Shimmer from "./components/Shared/Shimmer/Shimmer";
+
 
 //Lazy  Loading
-const GroceryStore = lazy(() => import("./components/GroceryStore"));
-const ContactUs = lazy(() => import("./components/ContactUs"));
-const AboutUs = lazy(() => import("./components/AboutUs"));
-const ErrorPage = lazy(() => import("./components/ErrorPage"));
-const RestaurantMenuList = lazy(() => import("./components/RestaurantMenuList"));
-const Cart = lazy(() => import("./components/Cart"));
+const GroceryStore = lazy(() => import("./components/Grocery/GroceryStore"));
+const ContactUs = lazy(() => import("./components/ContactUs/ContactUs"));
+const AboutUs = lazy(() => import("./components/AboutUs/AboutUs"));
+const ErrorPage = lazy(() => import("./components/Shared/ErrorPage/ErrorPage"));
+const RestaurantMenuList = lazy(() => import("./components/RestaurantMenuList/RestaurantMenuList"));
+const Cart = lazy(() => import("./components/Cart/Cart"));
 
 
 
@@ -33,6 +34,7 @@ const AppLayout = () => {
   function handleUserNameChange(newUserName) {
    console.log("handleUserNameChange called with:", newUserName);
   }
+
   return (
     <div className="app">
       <Provider store={appStore}>

@@ -1,9 +1,10 @@
-import { CDN_URL } from "../utils/constants";
+import { CDN_URL } from "../../utils/constants.js";
 import "./RestaurantMenu.css";
-import Shimmer from "./Shimmer";
+
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../utils/react-state-management/cartSlice.js";
+import { addItemToCart } from "../../utils/react-state-management/cartSlice.js";
 import { useParams } from "react-router-dom";
+import Shimmer from "../Shared/Shimmer/Shimmer.js";
 
 const RestaurantMenu = ({ menuItems }) => {
     const params = useParams();

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import "./AboutUs.css";
-import DefaultContexts from "../utils/custom_contexts/default_contexts";
+import DefaultContexts from "../../utils/custom_contexts/default_contexts";
 
 const AboutUs = () => {
 

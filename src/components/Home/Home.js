@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import useOnlineStatus from "../utils/custom_hooks/useOnlineStatus";
-import CardList from "./CardList";
+import useOnlineStatus from "../../utils/custom_hooks/useOnlineStatus";
+import CardList from "./Card/CardList";
 import "./Home.css";
-import Shimmer from "./Shimmer";
-import { API_BASE_URL } from "../utils/constants";
-import mockRestaurantList from "../utils/mockData";
+import Shimmer from "../Shared/Shimmer/Shimmer";
+import { API_BASE_URL } from "../../utils/constants";
+import mockRestaurantList from "../../utils/mockData";
 
 const normalizeRestaurantData = (restaurants = []) => {
   return restaurants.map((restaurant) => {
